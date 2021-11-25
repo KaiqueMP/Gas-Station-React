@@ -72,8 +72,14 @@ select::-ms-expand {
   font-weight: 600;
 }
 
-.user a {
+.user span {
   color: white;
+  background: transparent;
   font-weight: 400;
   opacity: 60%;
+  cursor: pointer;
+}
+
+.user span:hover {
+  text-decoration: underline;
 }

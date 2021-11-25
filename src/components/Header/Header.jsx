@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import React, { useState } from 'react';
 import {NewPerfilModal} from '../NewPerfilModal'
 
-export function Header ({}){
+export function Header (){
 
   const [isNewPerfilModalOpen, setIsNewPerfilModalOpen] = useState(false);
 
@@ -51,7 +51,7 @@ export function Header ({}){
          <img src={avatar} alt="imagem de perf il" />
          <div className="user-desc">
          <p className="user-name">Rafael Lima</p>
-          <button type="button" onClick={handleOpenNewPerfilModal} >Acessar perfil</button> 
+          <span onClick={handleOpenNewPerfilModal} >Acessar perfil</span> 
 
           <Modal 
             isOpen={isNewPerfilModalOpen} 
