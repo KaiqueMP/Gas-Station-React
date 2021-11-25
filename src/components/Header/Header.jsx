@@ -1,8 +1,22 @@
 import './styles.css';
-import logo from '../../assets/logo.svg'
-import avatar from '../../assets/avatar.jpeg'
+import logo from '../../assets/logo.svg';
+import avatar from '../../assets/avatar.jpeg';
+import Modal from 'react-modal';
+import React, { useState } from 'react';
+import {NewPerfilModal} from '../NewPerfilModal'
 
-export function Header (){
+export function Header ({}){
+
+  const [isNewPerfilModalOpen, setIsNewPerfilModalOpen] = useState(false);
+
+  function handleOpenNewPerfilModal(){
+    setIsNewPerfilModalOpen(true);
+  }
+
+  function handleCloseNewPerfilModal(){
+    setIsNewPerfilModalOpen(false);
+  }
+
   return (
     <div className="header ">
     
@@ -37,7 +51,15 @@ export function Header (){
          <img src={avatar} alt="imagem de perf il" />
          <div className="user-desc">
          <p className="user-name">Rafael Lima</p>
-          <a href="http://google.com" rel=" noreferrer" target="_blank">Acessar perfil</a> 
+          <button type="button" onClick={handleOpenNewPerfilModal} >Acessar perfil</button> 
+
+          <Modal 
+            isOpen={isNewPerfilModalOpen} 
+            onRequestClose={handleCloseNewPerfilModal}
+          >
+            <NewPerfilModal />
+          </Modal>
+          
 
          </div>
        </div>
