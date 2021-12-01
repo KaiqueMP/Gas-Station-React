@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GasStations from './gasStations'
+import { GasStations } from './gasStations'
 
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react'
 import PlacesAutocomplete, {
@@ -7,14 +7,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from 'react-places-autocomplete'
 
-
-
 export class MapContainer extends Component {
-  
-  
-  
-
-
   componentDidMount(props) {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -30,8 +23,6 @@ export class MapContainer extends Component {
       }
     )
   }
-
-  
 
   constructor(props) {
     super(props)
@@ -57,15 +48,14 @@ export class MapContainer extends Component {
   render() {
     const { loading, userLocation } = this.state
 
-    console.log(userLocation)
-
     if (loading) {
       return null
     }
 
+    console.log(GasStations.find)
+
     return (
       <div id="googleMap">
-        <GasStations />
         <PlacesAutocomplete
           value="Posto de gasolina"
           onChange={this.handleChange}
@@ -113,8 +103,7 @@ export class MapContainer extends Component {
         <Map google={this.props.google} onDragend={this.centerMoved} />
 
         <Map google={this.props.google} center={userLocation}>
-          <Marker position={userLocation}/>
-          
+          <Marker position={userLocation} />
 
           {
             <InfoWindow

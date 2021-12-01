@@ -1,37 +1,64 @@
-import React, { useEffect } from 'react'
+// import React, { useState } from 'react'
 import api from '../../services/api'
 
-export default function GasStations() {
+export class GasStations {
+  static find() {
+    navigator.geolocation.getCurrentPosition(position => {
+      api
+        .get(
+          `place/nearbysearch/json?location=${position.coords.latitude}%2C${position.coords.longitude}&radius=1500&type=gas-stations&keyword=posto-de-gasolina&key=AIzaSyCnnpVJ2TEjZOJr1EW_IExn2uj_owJb5hI`
+        )
+        .then(response => {
+          for (const item in response.data.results) {
+            const itemDesc = response.data.results[item]
+            const itemName = itemDesc.name
+          }
+        })
 
-  const useLat = -33.8670522
-  const useLong = 151.1957362
-  
-  
+        .catch(err => {
+          console.error('ops! ocorreu um erro' + err)
+        })
+    })
 
-
-  
-
-  useEffect(() => {
-    api
-      .get(
-        `place/nearbysearch/json?location=${useLat}%2C${useLong}&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyCnnpVJ2TEjZOJr1EW_IExn2uj_owJb5hI`
-      )
-      .then(response => {
-        console.log(response.data)
-        for (const item in response.data.results) {
-          const itemDesc = response.data.results[item]
-          const itemName = itemDesc.name 
-          console.log(itemName)
-        }
-
-        
-        
-      })
-
-      .catch(err => {
-        console.error('ops! ocorreu um erro' + err)
-      })
-  }, [useLat, useLong])
-
-  return <div className="App"></div>
+    return []
+  }
 }
+
+// export default function GasStations() {
+
+//   export  const [gasStations, setGasStations] = useState([]);
+
+//   useEffect(() => {
+
+//     navigator.geolocation.getCurrentPosition((position)=> {
+//       api
+//       .get(
+//         `place/nearbysearch/json?location=${position.coords.latitude}%2C${position.coords.longitude}&radius=1500&type=gas-stations&keyword=posto-de-gasolina&key=AIzaSyCnnpVJ2TEjZOJr1EW_IExn2uj_owJb5hI`
+//       )
+//       .then(response => {
+//         setGasStations(response.data.results)
+//       })
+
+//       .catch(err => {
+//         console.error('ops! ocorreu um erro' + err)
+//         setGasStations([])
+//       })
+//     })
+
+//   }, [])
+
+// console.log("fora" , latitude, longitude)
+
+// useEffect(()=> {
+//     navigator.geolocation.getCurrentPosition((position)=> {
+//       setLatitude(position.coords.latitude)
+//       setLongitude(position.coords.longitude)
+
+//     })
+//   }, [setLatitude, setLongitude])
+
+//   console.log("oHELLO", latitude)
+
+// for (const item in response.data.results) {
+//   const itemDesc = response.data.results[item]
+//   const itemName = itemDesc.name
